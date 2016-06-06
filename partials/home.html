@@ -1,0 +1,55 @@
+<div class="container home-wrapper">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Movies List <span id="yamdb"> - yet another movie database </span> <button class="btn btn-success btn-sm pull-right"  data-toggle="modal" data-target="#newMovieModal">Add Movie</button></h1>
+      <div class="input-group" id="movieSearch" >
+        <span class="input-group-addon" id="basic-addon1">Search Movies</span>
+        <input type="text" class="form-control" placeholder="Title, Genre, Actors" ng-model="movieSearch"></input>
+      </div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="movie in hCtrl.movies track by $index" ng-mouseenter="hover=true" ng-mouseleave="hover=false" ng-class="{hovered:hover,clickedOn:clicked}" ng-click="clicked=!clicked">
+            <td><img src="{{movie.Poster}}" height="150px"></td>
+            <td>
+              <p><b>{{movie.Title}}</b> <span class="sub"><b>({{movie.Released}})</b> Metascore: <span class="label label-warning">{{movie.Metascore}}</span> IMDB Rating: <span class="label label-warning">{{movie.imdbRating}}</span></span></p>
+              <p><b>Rated: {{movie.Rated}}</b> | <span class="sub">Runtime: {{movie.Runtime}}</span></p>
+              <p>{{movie.Plot}}</p>
+              <p><span class="sub">Genre: {{movie.Genre}} | Actors: {{movie.Actors}}</span></p>
+            </td>
+            <td>
+              <button class="btn btn-default btn-sm" ng-click="hCtrl.removeMovie(movie)"><span class="glyphicon glyphicon-remove-sign"></span></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="modal fade" id="newMovieModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add A New Movie</h4>
+      </div>
+      <div class="modal-body">
+        <p><span class="sub">Just pop in the movie title and we'll magically find your movie and all of its info!</span></p>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">Movie Title</span>
+          <input id="newMovieTitle" type="text" class="form-control" placeholder="">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success" ng-click="hCtrl.getData()" data-dismiss="modal">Add Movie</button>
+      </div>
+    </div>
+  </div>
+</div>
